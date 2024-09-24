@@ -18,6 +18,12 @@
 
 6. **RubyFlow**: Это ресурс, где публикуются статьи и новости о Ruby. Он может быть полезен для получения актуальной информации и обучения новым техникам. Сайт доступен по адресу [rubyflow.com](http://rubyflow.com).
 
+## Ссылки с мини-курсами для моей само подготовки. Для повторения основ.
+
+1. https://githowto.com/ru
+2. https://learngitbranching.js.org/
+3. https://linuxsurvival.com/linux-tutorial-introduction/
+
 ## Пример простого Ruby кода
 
 ```ruby
