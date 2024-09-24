@@ -26,3 +26,9 @@
 puts "Введите ваше имя:"
 name = gets.chomp
 puts "Привет, #{name}! Добро пожаловать в мир Ruby!"
+
+## Ссылки с мини-курсами для моей само подготовки. Для повторения основ.
+
+1. https://githowto.com/ru
+2. https://learngitbranching.js.org/
+3. https://linuxsurvival.com/linux-tutorial-introduction/
