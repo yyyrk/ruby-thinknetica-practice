@@ -24,6 +24,15 @@
 2. https://learngitbranching.js.org/
 3. https://linuxsurvival.com/linux-tutorial-introduction/
 
+## Полезные материалы:
+
+- Cheat Sheet по консоли, Ruby и Rails [pragtob.info](http://www.pragtob.info/rails-beginner-cheatsheet/index.html)
+- Мини-книга по командной строке https://launchschool.com/books/command_line
+- Мини-книга по Git и Github https://launchschool.com/books/git
+
+
+
+
 ## Пример простого Ruby кода
 
 ```ruby
