@@ -22,7 +22,7 @@
 
 1. по командной строке https://linuxsurvival.com/linux-tutorial-introduction/
 2. по git https://learngitbranching.js.org/
-3. http://githowto.com/ru
+3. по git на русском http://githowto.com/ru
 
 ## Полезные материалы:
 
