@@ -18,6 +18,21 @@
 
 6. **RubyFlow**: Это ресурс, где публикуются статьи и новости о Ruby. Он может быть полезен для получения актуальной информации и обучения новым техникам. Сайт доступен по адресу [rubyflow.com](http://rubyflow.com).
 
+## Ссылки с мини-курсами для моей само подготовки. Для повторения основ.
+
+1. по командной строке https://linuxsurvival.com/linux-tutorial-introduction/
+2. по git https://learngitbranching.js.org/
+3. по git на русском http://githowto.com/ru
+
+## Полезные материалы:
+
+- Cheat Sheet по консоли, Ruby и Rails [pragtob.info](http://www.pragtob.info/rails-beginner-cheatsheet/index.html)
+- Мини-книга по командной строке https://launchschool.com/books/command_line
+- Мини-книга по Git и Github https://launchschool.com/books/git
+
+
+
+
 ## Пример простого Ruby кода
 
 ```ruby
