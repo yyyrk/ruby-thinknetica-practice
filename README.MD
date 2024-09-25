@@ -20,9 +20,9 @@
 
 ## Ссылки с мини-курсами для моей само подготовки. Для повторения основ.
 
-1. https://githowto.com/ru
-2. https://learngitbranching.js.org/
-3. https://linuxsurvival.com/linux-tutorial-introduction/
+1. по командной строке https://linuxsurvival.com/linux-tutorial-introduction/
+2. по git https://learngitbranching.js.org/
+3. http://githowto.com/ru
 
 ## Полезные материалы:
 
