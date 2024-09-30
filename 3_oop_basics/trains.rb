@@ -49,7 +49,7 @@ class Train
   end
 
   def stop
-    speed = 0
+    @speed = 0
   end
 
   def hitch_wagon
@@ -59,9 +59,10 @@ class Train
   end
 
   def unhitch_wagon
-    if (speed == 0) & (wagons > 0)
-      self.wagons -= 1
+    if speed == 0 && wagons > 0
+      @wagons -= 1
     end
+
   end
 
   def select_route(route)
@@ -70,15 +71,15 @@ class Train
   end
 
   def current_station
-    @route.all_stations[current_station_index]
+    @route.stations[current_station_index]
   end
 
   def next_station
-    @route.all_stations[current_station_index + 1]
+    @route.stations[current_station_index + 1]
   end
 
   def previous_station
-    @route.all_stations[current_station_index - 1]
+    @route.stations[current_station_index - 1]
   end
 
   def go_next_station
@@ -89,3 +90,4 @@ class Train
     @current_station_index -= 1 if previous_station
   end
 end
+
