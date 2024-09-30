@@ -72,17 +72,17 @@ class Train
 
   def current_station
     return nil unless @route
-    @route.all_stations[current_station_index]
+    @route.stations[current_station_index]
   end
 
   def next_station
-    return nil unless @route && current_station_index < @route.all_stations.size - 1 # проверка, находится ли текущая станция в пределах массива
-    @route.all_stations[current_station_index + 1]
+    return nil unless @route && current_station_index < @route.stations.size - 1 # проверка, находится ли текущая станция в пределах массива
+    @route.stations[current_station_index + 1]
   end
 
   def previous_station
     return nil unless @route && current_station_index > 0 # проверка, находится ли текущая станция в пределах массива
-    @route.all_stations[current_station_index - 1]
+    @route.stations[current_station_index - 1]
   end
 
   def go_next_station
