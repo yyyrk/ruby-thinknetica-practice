@@ -32,7 +32,3 @@ puts "Количество вагонов после прицепки: #{train.w
 
 train.unhitch_wagon
 puts "Количество вагонов после отцепки: #{train.wagons}"
-
-# Проверка всех поездов на станции
-station1.accept_train(train)
-puts "Поезда на #{station1.instance_variable_get(:@name)}: #{station1.trains.map(&:number)}"
