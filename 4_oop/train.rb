@@ -63,21 +63,3 @@ class Train
     wagons.pop
   end
 end
-
-class PassengerTrain < Train
-  def hitch_wagon(wagon)
-    super if wagon.is_a?(PassengerWagon)
-  end
-end
-
-class CargoTrain < Train
-  def hitch_wagon(wagon)
-    super if wagon.is_a?(CargoWagon)
-  end
-end
-
-class PassengerWagon
-end
-
-class CargoWagon
-end

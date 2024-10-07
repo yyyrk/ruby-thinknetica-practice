@@ -1,8 +1,11 @@
 require_relative 'train'
 require_relative 'route'
 require_relative 'station'
+require_relative 'cargo_train'
+require_relative 'passenger_train'
+
 def main_menu
-  puts "=" * 80
+  puts "=" * 60
   puts " 1 - Создать станцию"
   puts " 2 - Создать поезд"
   puts " 3 - Создать маршрут"
@@ -16,7 +19,7 @@ def main_menu
   puts "11 - Просмотреть список станций"
   puts "12 - Просмотреть список поездов на станции"
   puts " 0 - Выход"
-  puts "=" * 80
+  puts "=" * 60
 end
 
 stations = []
@@ -97,7 +100,9 @@ loop do
     if train && train.speed.zero?
       wagon_type = train.is_a?(PassengerTrain) ? PassengerWagon : CargoWagon
       train.hitch_wagon(wagon_type.new)
-      puts "Вагон добавлен к поезду '#{train_number}'."
+      puts "Вагон доб
+
+авлен к поезду '#{train_number}'."
     else
       puts "Поезд не найден или он движется."
     end
