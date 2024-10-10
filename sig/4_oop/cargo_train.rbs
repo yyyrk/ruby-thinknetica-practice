@@ -1,0 +1,5 @@
+class CargoTrain < Train
+  def hitch_wagon: (untyped wagon) -> (untyped | nil)
+
+  def number: () -> nil
+end
