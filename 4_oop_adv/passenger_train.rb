@@ -7,10 +7,4 @@ class PassengerTrain < Train
     super
     @type = :passenger
   end
-
-  protected
-
-  def join_wagon?(wagon)
-    wagon.is_a?(PassengerWagon)
-  end
 end

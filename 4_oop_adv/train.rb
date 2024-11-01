@@ -62,6 +62,10 @@ class Train
 
   private
 
+  def join_wagon?(wagon)
+    type == wagon.type
+  end
+
   def next_station
     @route.all_stations[@station_number + 1]
   end
