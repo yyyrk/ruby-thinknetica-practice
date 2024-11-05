@@ -20,7 +20,6 @@ class Manage
     puts '6. Назначить поезду маршрут'
     puts '7. Добавить/отцепить вагон'
     puts '8. Отправить поезд по маршруту'
-    puts '9. Показать список станций и список поездов на станции'
     puts '0. Выйти из программы'
     puts '=' * 60
     print 'Выберите номер из меню:'
@@ -40,7 +39,7 @@ class Manage
         create_train
       when '3'
         create_wagon
-      when '4_oop_adv'
+      when '4'
         create_route
       when '5'
         train_get_route
