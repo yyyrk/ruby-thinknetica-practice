@@ -1,3 +1,5 @@
+require_relative 'manufactures'
+
 class Wagon
   include Manufactures
 
