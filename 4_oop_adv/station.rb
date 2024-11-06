@@ -1,9 +1,20 @@
 class Station
-  attr_reader :name, :trains_on_station
-  def initialize(name)
-    @name = name
+
+  include Manufactures
+  include InstanceCounter
+  attr_reader :station_name, :trains_on_station
+  @@all_stations = []
+
+  def self.all
+    @@all_stations
+  end
+
+  def initialize(station_name)
+    @name = station_name
     @trains_on_station = []
+    @@all_stations << self
     puts "Создана станция #{name}"
+    register_instance
   end
 
   def get_train(train)
