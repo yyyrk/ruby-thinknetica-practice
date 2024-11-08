@@ -13,7 +13,7 @@ class Station
     @name = station_name
     @trains_on_station = []
     @@all_stations << self
-    puts "Создана станция #{name}"
+    puts "Создана станция #{station_name}"
     register_instance
   end
 
