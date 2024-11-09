@@ -11,10 +11,17 @@ class Station
 
   def initialize(station_name)
     @name = station_name
+    validate!
     @trains_on_station = []
     @@all_stations << self
     puts "Создана станция #{station_name}"
     register_instance
+  end
+
+  def valid?
+    validate!
+  rescue
+    false
   end
 
   def get_train(train)
@@ -33,5 +40,12 @@ class Station
   def train_out(train)
     puts "Поезд #{@trains_on_station.delete(train)} покидает станцию #{@name}"
     @trains_on_station.delete(train)
+  end
+
+  def validate!
+    raise "Название станции не может быть пустым!" if name.nil?
+    raise "Название станции не может быть пустым!" if name.strip.empty?
+    raise "Название станции должно содержать не менее 3 символов" if name.length < 2
+    true
   end
 end
