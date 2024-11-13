@@ -2,9 +2,12 @@ require_relative 'manufactures'
 require_relative 'instance_counter'
 
 class Train
-  include Manufactures, InstanceCounter
+  include InstanceCounter
+  include Manufactures
 
   attr_reader :number, :current_speed, :all_wagons
+
+  NUMBER_FORMAT = /^[а-яА-Яa-zA-Z0-9]{3}-?[а-яА-Яa-zA-Z0-9]{2}$/i.freeze
 
   @@trains = {}
 
@@ -13,6 +16,7 @@ class Train
   end
 
   def initialize(number)
+    validate!(number)
     @number = number
     @all_wagons = []
     @current_speed = 0
@@ -23,30 +27,27 @@ class Train
 
   def speedup(number)
     @current_speed = number
-    puts "Ускорение поезда #{@current_speed}"
+    # puts "Ускорение поезда #{@current_speed}"
   end
 
   def current_speed
-    puts "Текущая скорость поезда: #{@current_speed}"
+    # puts "Текущая скорость поезда: #{@current_speed}"
   end
 
   def stop
     @current_speed = 0
-    puts "Стоп! Скорость поезда: #{@current_speed}"
+    # puts "Стоп! Скорость поезда: #{@current_speed}"
   end
 
   def connect_wagon(wagon)
-    if @current_speed == 0 && (wagon.type == :cargo || wagon.type == :passenger)
-      @all_wagons << wagon unless @all_wagons.include?(wagon)
-    end
+    return unless @current_speed.zero? && (wagon.type == :cargo || wagon.type == :passenger)
+
+    @all_wagons << wagon unless @all_wagons.include?(wagon)
   end
 
   def delete_wagon(wagon)
-    if @current_speed == 0 && @all_wagons > 0
-      @all_wagons.delete(wagon)
-    else
-      puts 'Невозможно удалить вагон от поезда'
-    end
+    @current_speed.zero? && @all_wagons.positive?
+    @all_wagons.delete(wagon)
   end
 
   def get_route(route)
@@ -57,6 +58,7 @@ class Train
 
   def forward
     return if next_station.nil?
+
     current_station.train_out(self)
     next_station.get_train(self)
     @station_number += 1
@@ -64,6 +66,7 @@ class Train
 
   def back
     return if prev_station.nil?
+
     current_station.train_out(self)
     prev_station.get_train(self)
     @station_number -= 1
@@ -85,5 +88,18 @@ class Train
 
   def prev_station
     @route.all_stations[@station_number - 1] if @station_number != 0
+  end
+
+  def valid?
+    validate!(number)
+    true
+  rescue RuntimeError
+    false
+  end
+
+  protected
+
+  def validate!(number)
+    raise 'Неверный формат номера поезда!' if number !~ NUMBER_FORMAT
   end
 end

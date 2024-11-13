@@ -67,7 +67,7 @@ class Manage
   end
 
   def create_train
-    puts 'Введите номер поезда в формате ХХХХ'
+    puts 'Введите номер поезда в формате ХХХ-Х или ХХХХХ  (примеры:ABC12, 123-AB, A1B-34, XYZ99)'
     number = gets.chomp
 
     puts 'Введите тип создаваемого поезда
