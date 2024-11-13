@@ -13,20 +13,21 @@ class Station
   end
 
   def initialize(station_name)
+    validate!(station_name)
     @name = station_name
     @trains_on_station = []
     @@all_stations << self
-    puts "Создана станция #{station_name}"
+    # puts "Создана станция #{station_name}"
     register_instance
   end
 
   def get_train(train)
     @trains_on_station << train
-    puts "Поезд #{train} прибыл на станцию #{@name}"
+    # puts "Поезд #{train} прибыл на станцию #{@name}"
   end
 
   def all_train
-    puts "Поезда на станции #{@name}: #{@trains_on_station}"
+    # puts "Поезда на станции #{@name}: #{@trains_on_station}"
   end
 
   def type_train(type)
@@ -34,7 +35,20 @@ class Station
   end
 
   def train_out(train)
-    puts "Поезд #{@trains_on_station.delete(train)} покидает станцию #{@name}"
+    # puts "Поезд #{@trains_on_station.delete(train)} покидает станцию #{@name}"
     @trains_on_station.delete(train)
+  end
+
+  def valid?
+    validate!(name)
+    true
+  rescue RuntimeError
+    false
+  end
+
+  private
+
+  def validate!(name)
+    raise 'Название станции не может быть пустым!!!' if name.nil? || name.empty?
   end
 end
