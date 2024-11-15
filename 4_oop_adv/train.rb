@@ -1,13 +1,14 @@
 require_relative 'manufactures'
 require_relative 'instance_counter'
+require_relative 'validations'
 
 class Train
   include InstanceCounter
   include Manufactures
+  include Validations
 
   attr_reader :number, :current_speed, :all_wagons
 
-  NUMBER_FORMAT = /^[а-яА-Яa-zA-Z0-9]{3}-?[а-яА-Яa-zA-Z0-9]{2}$/i.freeze
 
   @@trains = {}
 
@@ -16,13 +17,15 @@ class Train
   end
 
   def initialize(number)
-    validate!(number)
+    # validate!(number)
+
     @number = number
     @all_wagons = []
     @current_speed = 0
     @station_number = 0
     @@trains[number] = self
     register_instance
+    validate!
   end
 
   def speedup(number)
@@ -31,7 +34,7 @@ class Train
   end
 
   def current_speed
-    # puts "Текущая скорость поезда: #{@current_speed}"
+    p current_speed
   end
 
   def stop
@@ -90,16 +93,16 @@ class Train
     @route.all_stations[@station_number - 1] if @station_number != 0
   end
 
-  def valid?
-    validate!(number)
-    true
-  rescue RuntimeError
-    false
-  end
-
-  protected
-
-  def validate!(number)
-    raise 'Неверный формат номера поезда!' if number !~ NUMBER_FORMAT
-  end
+  # def valid?
+  #   validate!(number)
+  #   true
+  # rescue RuntimeError
+  #   false
+  # end
+  #
+  # protected
+  #
+  # def validate!(number)
+  #   raise 'Неверный формат номера поезда!' if number !~ NUMBER_FORMAT
+  # end
 end

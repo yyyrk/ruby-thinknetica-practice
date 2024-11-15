@@ -1,4 +1,8 @@
+require_relative 'validations'
+
 class Route
+  include Validations
+
   attr_reader :first_station, :last_station, :all_stations
 
   def initialize(first_station, last_station)
@@ -16,17 +20,17 @@ class Route
     @all_stations.delete(station) if (@all_stations[0] != station) && (@all_stations[-1] != station)
   end
 
-  def valid?
-    @stations.each { |station| validate!(station) }
-    true
-  rescue RuntimeError
-    false
-  end
+  # def valid?
+  #   @stations.each { |station| validate!(station) }
+  #   true
+  # rescue RuntimeError
+  #   false
+  # end
 
-  private
+  # private
 
-  def validate!(station)
-    raise "Станции #{station} не создана!!!" unless station.is_a? Station
-  end
+  # def validate!(station)
+  #   raise "Станции #{station} не создана!!!" unless station.is_a? Station
+  # end
 
 end

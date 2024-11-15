@@ -1,24 +1,28 @@
 require_relative 'manufactures'
 require_relative 'instance_counter'
+require_relative 'validations'
 
 class Station
 
   include Manufactures
   include InstanceCounter
-  attr_reader :station_name, :trains_on_station
+  include Validations
+
+  attr_reader :name, :trains_on_station
   @@all_stations = []
 
   def self.all
     @@all_stations
   end
 
-  def initialize(station_name)
-    validate!(station_name)
-    @name = station_name
+  def initialize(name)
+
+    @name = name
     @trains_on_station = []
     @@all_stations << self
     # puts "Создана станция #{station_name}"
     register_instance
+    validate!
   end
 
   def get_train(train)
@@ -39,16 +43,16 @@ class Station
     @trains_on_station.delete(train)
   end
 
-  def valid?
-    validate!(name)
-    true
-  rescue RuntimeError
-    false
-  end
+  # def valid?
+  #   validate!(name)
+  #   true
+  # rescue RuntimeError
+  #   false
+  # end
 
-  private
+  # private
 
-  def validate!(name)
-    raise 'Название станции не может быть пустым!!!' if name.nil? || name.empty?
-  end
+  # def validate!(name)
+  #   raise 'Название станции не может быть пустым!!!' if name.nil? || name.empty?
+  # end
 end

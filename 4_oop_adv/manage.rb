@@ -9,20 +9,33 @@ class Manage
   end
 
   def menu
-    puts '=' * 60
-    puts '       МЕНЮ:'
-    puts '-' * 60
-    puts '1. Создать станцию'
-    puts '2. Создать поезд'
-    puts '3. Создать вагон'
-    puts '4. Создать маршрут'
-    puts '5. Добавить/удалить станцию из маршрута'
-    puts '6. Назначить поезду маршрут'
-    puts '7. Добавить/отцепить вагон'
-    puts '8. Отправить поезд по маршруту'
-    puts '0. Выйти из программы'
-    puts '=' * 60
-    print 'Выберите номер из меню:'
+    model_of_train = %q(
+___________   _______________________________________^__
+ ___   ___ |||  ___   ___   ___    ___ ___  |   __  ,----\
+|   | |   |||| |   | |   | |   |  |   |   | |  |  | |_____\
+|___| |___|||| |___| |___| |___|  | O | O | |  |  |        \
+           |||                    |___|___| |  |__|         |
+___________|||______________________________|______________/
+           |||                                        /------
+-----------'''---------------------------------------'
+)
+    border = '|'
+    line = '=' * 60
+    puts model_of_train
+    puts line
+    puts "#{border}               <<---- GLOBAL MENU ---->>                  #{border}"
+    puts line
+    puts "#{border} 1. Создать станцию                                       #{border}"
+    puts "#{border} 2. Создать поезд                                         #{border}"
+    puts "#{border} 3. Создать вагон                                         #{border}"
+    puts "#{border} 4. Создать маршрут                                       #{border}"
+    puts "#{border} 5. Добавить/удалить станцию из маршрута                  #{border}"
+    puts "#{border} 6. Назначить поезду маршрут                              #{border}"
+    puts "#{border} 7. Добавить/отцепить вагон                               #{border}"
+    puts "#{border} 8. Отправить поезд по маршруту                           #{border}"
+    puts "#{border} 0. Выйти из программы                                    #{border}"
+    puts line
+    print "#{border} Выберите номер из меню: "
   end
 
   def choose
@@ -58,7 +71,7 @@ class Manage
   private #Делаем изолированным тк пользователю нет необходимости иметь доступ к этим функциям
 
   def create_station
-    puts 'Введите название станции'
+    print 'Введите название вашей станции: '
     name = gets.chomp.capitalize
 
     station = Station.new(name)
@@ -67,12 +80,14 @@ class Manage
   end
 
   def create_train
-    puts 'Введите номер поезда в формате ХХХ-Х или ХХХХХ  (примеры:ABC12, 123-AB, A1B-34, XYZ99)'
+    print 'Введите номер поезда в формате ХХХ-Х или ХХХХХ  (примеры:ABC12, 123-AB, A1B-34, XYZ99): '
     number = gets.chomp
 
-    puts 'Введите тип создаваемого поезда
-  1. Грузовой
-  2. Пассажирский'
+    print 'Введите тип создаваемого поезда
+  1. Пассажирский
+  2. Грузовой
+
+  Номер типа поезда: '
 
     option = gets.strip
 
@@ -90,9 +105,19 @@ class Manage
     end
   end
 
+  # def list_stations
+  #   @stations.each.with_index(1) do |station, index|
+  #     puts "#{index}. #{@stations[index]} - #{@stations[index].name}"
+  #   end
+  # end ---- Ошибочный код, внизу корректный, позже удалю этот коммент
+
   def list_stations
     @stations.each.with_index(1) do |station, index|
-      puts "#{index}. #{@stations[index]} - #{@stations[index].name}"
+      if station.nil?
+        puts "#{index}. Станция не найдена"
+      else
+        puts "#{index}. #{station} - #{station.name}"
+      end
     end
   end
 
@@ -115,12 +140,12 @@ class Manage
   end
 
   def create_route
-    puts 'Введите порядковый номер начальной станции в маршруте'
+    print 'Введите порядковый номер начальной станции в маршруте: '
     list_stations
     first_station = gets.chomp.to_i
     choose_first_station = @stations[first_station - 1]
 
-    puts 'Введите порядковый номер конечной станции в маршруте'
+    print 'Введите порядковый номер конечной станции в маршруте: '
     list_stations
     last_station = gets.chomp.to_i
     choose_last_station = @stations[last_station - 1]
@@ -140,13 +165,13 @@ class Manage
 
     option = gets.chomp
 
-    puts 'Введите порядковый номер маршрута'
+    print 'Введите порядковый номер маршрута: '
     list_routes
     route_number = gets.chomp.to_i
 
     choose_route = @routes[route_number - 1]
 
-    puts 'Введите порядковый номер станции'
+    print 'Введите порядковый номер станции: '
     list_stations
     station_number = gets.chomp.to_i
 
@@ -165,11 +190,11 @@ class Manage
   end
 
   def train_get_route
-    puts 'Введите порядковый номер маршрута'
+    print 'Введите порядковый номер маршрута: '
     list_routes
     route_number = gets.chomp
 
-    puts 'Введите порядковый номер поезда'
+    print 'Введите порядковый номер поезда: '
     list_trains
     train_number = gets.chomp
 
@@ -235,7 +260,7 @@ class Manage
     option = gets.chomp
 
     list_trains
-    puts 'Выберите поезд из списка выше'
+    print 'Выберите поезд из списка выше: '
     train_number = gets.chomp.to_i
 
     choose_train = @trains[train_number - 1]
@@ -253,7 +278,7 @@ class Manage
   end
 
   def trains_on_station
-    puts 'Введите номер станции'
+    print 'Введите номер станции: '
     list_stations
     station = gets.chomp.to_i
 
