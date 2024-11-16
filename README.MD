@@ -1,6 +1,7 @@
 # Моё хранилище решенных ruby задачек
 
-Здесь я регулярно буду выкладывать решения задач от школы программирования Thinktetica
+Здесь я регулярно буду выкладывать решения задач от школы программирования Thinktetica. Важная заметка - несколько уроков я сохранял в 4 урок и не создавал новые папки, поэтому в 5 идут сразу блоки.
+
 
 ## Важные ссылки для любого Ruby разработчика
 
@@ -36,8 +37,18 @@
 ## Пример простого Ruby кода
 
 ```ruby
-# Приветствие пользователя
+# передача блока как именованного аргумента:
 
-puts "Введите ваше имя:"
-name = gets.chomp
-puts "Привет, #{name}! Добро пожаловать в мир Ruby!"
+def caps(str, &block)
+  str.capitalize!
+  block.call(str)
+end
+
+caps('abc') { |x| puts x }
+```
+
+## Ссылки которые оказались для меня полезными
+
+-  Просто PDF с оновами [по рубикам](https://launchschool.com/books/githttps://www.rubyguides.com/wp-content/uploads/2019/11/ruby-reference-2019-optin.pdf)
+- Классная статься [про блоки](https://online.pragmaticstudio.com/tour/courses/ruby-blocks/steps/4)
+- Этот сайт мне просто понравился про рубинчик от [rubyguides](rubyguides.com)
