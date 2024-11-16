@@ -17,15 +17,15 @@ class Train
   end
 
   def initialize(number)
-    # validate!(number)
-
     @number = number
     @all_wagons = []
     @current_speed = 0
     @station_number = 0
-    @@trains[number] = self
+
+    validate! # Выполняю валидацию
+
+    @@trains[number] = self # Теперь регистрируем объект только если он валиден
     register_instance
-    validate!
   end
 
   def speedup(number)
