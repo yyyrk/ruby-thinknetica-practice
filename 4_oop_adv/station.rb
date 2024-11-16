@@ -19,10 +19,12 @@ class Station
 
     @name = name
     @trains_on_station = []
+
+    validate!
+
     @@all_stations << self
     # puts "Создана станция #{station_name}"
     register_instance
-    validate!
   end
 
   def get_train(train)
