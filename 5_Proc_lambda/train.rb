@@ -24,8 +24,12 @@ class Train
 
     validate! # Выполняю валидацию
 
-    @@trains[number] = self # Теперь регистрируем объект только если он валиден
+    @@trains[number] = self # Теперь регистрируем объект только если он валиден, но все равно регистрируется пустышка...
     register_instance
+  end
+
+  def wagon_into_block(wagons, block)
+    wagons.each { |wagon| block.call(wagon) }
   end
 
   def speedup(number)

@@ -8,7 +8,7 @@ module InstanceCounter
     attr_reader :instances
 
     def add_instance
-      @instances  = @instances.to_i + 1
+      @instances = @instances.to_i + 1
     end
   end
 

@@ -27,6 +27,10 @@ class Station
     register_instance
   end
 
+  def train_into_block(trains, block)
+    trains.each { |train| block.call(train) }
+  end
+
   def get_train(train)
     @trains_on_station << train
     # puts "Поезд #{train} прибыл на станцию #{@name}"
