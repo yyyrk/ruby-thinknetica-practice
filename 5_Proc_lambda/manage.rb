@@ -33,6 +33,8 @@ ___________|||______________________________|______________/
     puts "#{border} 6. Назначить поезду маршрут                              #{border}"
     puts "#{border} 7. Добавить/отцепить вагон                               #{border}"
     puts "#{border} 8. Отправить поезд по маршруту                           #{border}"
+    puts "#{border} 9. Добавить груз или занять места в вагоне               #{border}"
+
     puts "#{border} 0. Выйти из программы                                    #{border}"
     puts line
     print "#{border} Выберите номер из меню: "
@@ -61,6 +63,8 @@ ___________|||______________________________|______________/
       when '7'
         move_train
       when '8'
+        trains_on_station
+      when '9'
         trains_on_station
       else
         puts 'Такого пункта в меню не существует'
@@ -104,12 +108,6 @@ ___________|||______________________________|______________/
       puts 'Выбран неправильный вариант'
     end
   end
-
-  # def list_stations
-  #   @stations.each.with_index(1) do |station, index|
-  #     puts "#{index}. #{@stations[index]} - #{@stations[index].name}"
-  #   end
-  # end ---- Ошибочный код, внизу корректный, позже удалю этот коммент
 
   def list_stations
     @stations.each.with_index(1) do |station, index|
@@ -205,24 +203,35 @@ ___________|||______________________________|______________/
   end
 
   def create_wagon
-    puts '1.Создать пассажирский вагон'
-    puts '2.Создать грузовой вагон'
+    puts '1. Создать пассажирский вагон'
+    puts '2. Создать грузовой вагон'
 
     option = gets.strip
 
     case option
     when '1'
-      wagon = PassengerWagon.new
+      puts 'Введите номер пассажирского вагона:'
+      number = gets.strip
+      puts 'Введите количество мест в вагоне:'
+      amount = gets.strip.to_i
+
+      wagon = PassengerWagon.new(number, amount)
       @wagons << wagon
       p @wagons
     when '2'
-      wagon = CargoWagon.new
+      puts 'Введите номер грузового вагона:'
+      number = gets.strip
+      puts 'Введите вместимость груза в вагоне:'
+      volume = gets.strip.to_i
+
+      wagon = CargoWagon.new(number, volume)
       @wagons << wagon
       p @wagons
     else
       puts 'Такого варианта нет'
     end
   end
+
 
   def manage_wagons
     puts 'Выберите действие с вагоном:
@@ -269,7 +278,7 @@ ___________|||______________________________|______________/
     case option
     when '1'
       choose_train.forward
-    when  option == '2'
+    when option == '2'
       choose_train.back
     else
       puts 'неверный выбор'
