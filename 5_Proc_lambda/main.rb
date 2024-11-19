@@ -10,6 +10,14 @@ require_relative 'wagon'
 require_relative 'validations'
 require_relative 'manufactures'
 
+begin
+  require 'colorize'
+rescue LoadError
+  puts "Установка гема colorize..."
+  system("gem install colorize")
+  require 'colorize'
+end
+
 # puts "Управляющий интерфейс"
 start = Manage.new
 start.choose

@@ -1,3 +1,5 @@
+require 'colorize'
+
 class Manage
   attr_reader :wagons, :trains, :stations, :routes
 
@@ -20,27 +22,27 @@ ___________|||______________________________|______________/
 -----------'''---------------------------------------'
 )
     border = '|'
-    line = '=' * 60
-    puts model_of_train
-    puts line
-    puts "#{border}               <<---- GLOBAL MENU ---->>                  #{border}"
-    puts line
-    puts "#{border}  1. Создать станцию                                      #{border}"
-    puts "#{border}  2. Создать поезд                                        #{border}"
-    puts "#{border}  3. Создать вагон                                        #{border}"
-    puts "#{border}  4. Создать маршрут                                      #{border}"
-    puts "#{border}  5. Добавить/удалить станцию из маршрута                 #{border}"
-    puts "#{border}  6. Назначить поезду маршрут                             #{border}"
-    puts "#{border}  7. Добавить/отцепить вагон                              #{border}"
-    puts "#{border}  8. Отправить поезд по маршруту                          #{border}"
+    line = '-' * 60
+    bold_line = '=' * 60
 
-    puts "#{border}  9. Вывести список вагонов у поезда                      #{border}"
-    puts "#{border} 10. Выводить список поездов на станции                   #{border}"
-    puts "#{border} 11. Занять место или объем в вагоне                      #{border}"
-
-    puts "#{border}  0. Выйти из программы                                   #{border}"
-    puts line
-    print "#{border} Выберите номер из меню: "
+    puts model_of_train.colorize(:light_red)
+    puts bold_line.colorize(:light_black)
+    puts "#{border}               <<---- GLOBAL MENU ---->>                  #{border}".colorize(:light_blue)
+    puts bold_line.colorize(:light_black)
+    puts "#{border}  1. Создать станцию                                      #{border}".colorize(:white)
+    puts "#{border}  2. Создать поезд                                        #{border}".colorize(:white)
+    puts "#{border}  3. Создать вагон                                        #{border}".colorize(:white)
+    puts "#{border}  4. Создать маршрут                                      #{border}".colorize(:white)
+    puts "#{border}  5. Добавить/удалить станцию из маршрута                 #{border}".colorize(:light_black)
+    puts "#{border}  6. Назначить поезду маршрут                             #{border}".colorize(:light_black)
+    puts "#{border}  7. Добавить/отцепить вагон                              #{border}".colorize(:light_black)
+    puts "#{border}  8. Отправить поезд по маршруту                          #{border}".colorize(:light_black)
+    puts "#{border}  9. Вывести список вагонов у поезда                      #{border}".colorize(:light_blue)
+    puts "#{border} 10. Выводить список поездов на станции                   #{border}".colorize(:light_blue)
+    puts "#{border} 11. Занять место или объем в вагоне                      #{border}".colorize(:light_blue)
+    puts "#{border}  0. Выйти из программы                                   #{border}".colorize(:light_blue)
+    puts bold_line.colorize(:light_black)
+    print "#{border} Выберите номер из меню: ".colorize(:light_red)
   end
 
   def choose
