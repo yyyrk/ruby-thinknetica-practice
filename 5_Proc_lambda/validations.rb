@@ -1,7 +1,7 @@
 module Validations
   NUMBER_TRAIN_FORMAT = /^[а-яА-Яa-zA-Z0-9]{3}-?[а-яА-Яa-zA-Z0-9]{2}$/i.freeze
 
-  #test
+
 
   def validate!
     begin
