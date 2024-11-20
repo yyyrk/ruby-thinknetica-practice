@@ -21,19 +21,29 @@ ___________|||______________________________|______________/
 )
     border = '|'
     line = '=' * 60
+
+    # ANSI escape codes for colors
+    color_reset = "\e[0m"
+    color_header = "\e[34m"  # Blue
+    color_option = "\e[32m"   # Green
+    color_exit = "\e[31m"     # Red
+
     puts model_of_train
     puts line
-    puts "#{border}               <<---- GLOBAL MENU ---->>                  #{border}"
+    puts "#{border}               #{color_header}<<---- GLOBAL MENU ---->>#{color_reset}                   #{border}"
     puts line
-    puts "#{border} 1. Создать станцию                                       #{border}"
-    puts "#{border} 2. Создать поезд                                         #{border}"
-    puts "#{border} 3. Создать вагон                                         #{border}"
-    puts "#{border} 4. Создать маршрут                                       #{border}"
-    puts "#{border} 5. Добавить/удалить станцию из маршрута                  #{border}"
-    puts "#{border} 6. Назначить поезду маршрут                              #{border}"
-    puts "#{border} 7. Добавить/отцепить вагон                               #{border}"
-    puts "#{border} 8. Отправить поезд по маршруту                           #{border}"
-    puts "#{border} 0. Выйти из программы                                    #{border}"
+    puts "#{border}  #{color_option}1. Создать станцию                                       #{color_reset}#{border}"
+    puts "#{border}  #{color_option}2. Создать поезд                                         #{color_reset}#{border}"
+    puts "#{border}  #{color_option}3. Создать вагон                                         #{color_reset}#{border}"
+    puts "#{border}  #{color_option}4. Создать маршрут                                       #{color_reset}#{border}"
+    puts "#{border}  #{color_option}5. Добавить/удалить станцию из маршрута                  #{color_reset}#{border}"
+    puts "#{border}  #{color_option}6. Назначить поезду маршрут                              #{color_reset}#{border}"
+    puts "#{border}  #{color_option}7. Добавить/отцепить вагон                               #{color_reset}#{border}"
+    puts "#{border}  #{color_option}8. Отправить поезд по маршруту                           #{color_reset}#{border}"
+    puts "#{border}  #{color_option}9. Вывести список вагонов у поезда                       #{color_reset}#{border}"
+    puts "#{border}  #{color_option}10. Выводить список поездов на станции                    #{color_reset}#{border}"
+    puts "#{border}  #{color_option}11. Занять место или объем в вагоне                       #{color_reset}#{border}"
+    puts "#{border}  #{color_exit}0. Выйти из программы                                    #{color_reset}#{border}"
     puts line
     print "#{border} Выберите номер из меню: "
   end

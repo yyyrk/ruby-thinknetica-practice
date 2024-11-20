@@ -9,14 +9,15 @@ require_relative 'manage'
 require_relative 'wagon'
 require_relative 'validations'
 require_relative 'manufactures'
+# require 'colorize'
 
-begin
-  require 'colorize'
-rescue LoadError
-  puts "Установка гема colorize..."
-  system("gem install colorize")
-  require 'colorize'
-end
+# begin
+#   require 'colorize'
+# rescue LoadError
+#   puts "Установка гема colorize..."
+#   system("gem install colorize")
+#   require 'colorize'
+# end
 
 # puts "Управляющий интерфейс"
 start = Manage.new
@@ -150,4 +151,19 @@ def primary
 
   pt4.add_wagon(pw8)
   pt4.add_wagon(pw10)
+
+  #==================================
+
+  station1 = Station.new("Станция 1")
+  station2 = Station.new("Станция 2")
+
+  train1 = Train.new("101", "Пассажирский", 5)
+  train2 = Train.new("102", "Грузовой", 10)
+  train3 = Train.new("103", "Пассажирский", 8)
+
+  station1.add_train(train1)
+  station1.add_train(train2)
+  station2.add_train(train3)
+
+  stations = [station1, station2]
 end
