@@ -72,6 +72,12 @@ ___________|||______________________________|______________/
         move_train
       when '8'
         trains_on_station
+      when '9'
+        trains_on_station
+      when '10'
+        look_trains_by_stations(" - - - - list stations for select - - - - #{message_return} ", @stations)
+      when '11'
+        trains_on_station
       else
         puts 'Такого пункта в меню не существует'
       end

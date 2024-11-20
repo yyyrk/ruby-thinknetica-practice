@@ -48,17 +48,4 @@ class Station
     # puts "Поезд #{@trains_on_station.delete(train)} покидает станцию #{@name}"
     @trains_on_station.delete(train)
   end
-
-  # def valid?
-  #   validate!(name)
-  #   true
-  # rescue RuntimeError
-  #   false
-  # end
-
-  # private
-
-  # def validate!(name)
-  #   raise 'Название станции не может быть пустым!!!' if name.nil? || name.empty?
-  # end
 end

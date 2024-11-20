@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+require_relative 'train'
 
 class Manage
   attr_reader :wagons, :trains, :stations, :routes
@@ -24,9 +24,9 @@ ___________|||______________________________|______________/
     border = '|'
     line = '=' * 60
 
-    # ANSI
+    # ANSI коды
     color_reset = "\e[0m"
-    color_header = "\e[34m"  # Blue
+    color_header = "\e[34m" # Blue
     color_option = "\e[32m"   # Green
     color_exit = "\e[31m"     # Red
 
@@ -73,13 +73,13 @@ ___________|||______________________________|______________/
       when '7'
         move_train
       when '8'
-        trains_on_station
+        move_train
       when '9'
-        list_all_numbers("===== List all Wagons:", @wagons)
+        list_wagons
       when '10'
         trains_on_station
       when '11'
-        trains_on_station
+        occupy_wagon
       else
         puts 'Такого пункта в меню не существует'
       end
@@ -123,12 +123,6 @@ ___________|||______________________________|______________/
     end
   end
 
-  # def list_stations
-  #   @stations.each.with_index(1) do |station, index|
-  #     puts "#{index}. #{@stations[index]} - #{@stations[index].name}"
-  #   end
-  # end ---- Ошибочный код, внизу корректный, позже удалю этот коммент
-
   def list_stations
     @stations.each.with_index(1) do |station, index|
       if station.nil?
@@ -136,12 +130,6 @@ ___________|||______________________________|______________/
       else
         puts "#{index}. #{station} - #{station.name}"
       end
-    end
-  end
-
-  def list_trains
-    @trains.each.with_index(1) do |_train, index|
-      puts "#{index}. Поезд #{@trains[index].number} - тип #{@trains[index].type} "
     end
   end
 
@@ -153,9 +141,14 @@ ___________|||______________________________|______________/
 
   def list_wagons
     @wagons.each.with_index(1) do |wagon, index|
-      puts "#{index}. Вагон: #{wagon.type}"
+      if wagon.is_a?(PassengerWagon)
+        puts "#{index}. Пассажирский вагон #{wagon.number}: занято #{wagon.busy} / свободно #{wagon.unbusy} мест"
+      elsif wagon.is_a?(CargoWagon)
+        puts "#{index}. Грузовой вагон #{wagon.number}: занято #{wagon.busy} / свободно #{wagon.unbusy} объема"
+      end
     end
   end
+
 
   def create_route
     print 'Введите порядковый номер начальной станции в маршруте: '
@@ -237,19 +230,20 @@ ___________|||______________________________|______________/
       places = gets.strip.to_i
       wagon = PassengerWagon.new(number, places)
       @wagons << wagon
-      p @wagons
+      puts "Пассажирский вагон #{wagon.number} создан с #{places} местами"
     when '2'
       puts 'Введите номер грузового вагона:'
       number = gets.strip.to_i
-      puts 'Введите вместимость грузового вагона:'
+      puts 'Введите вместимость грузового вагона (объем):'
       capacity = gets.strip.to_i
-      wagon = CargoWagon.new(number, capacity) # Предполагается, что CargoWagon также имеет правильный конструктор
+      wagon = CargoWagon.new(number, capacity)
       @wagons << wagon
-      p @wagons
+      puts "Грузовой вагон #{wagon.number} создан с объемом #{capacity}."
     else
       puts 'Такого варианта нет'
     end
   end
+
 
   def manage_wagons
     puts 'Выберите действие с вагоном:
@@ -304,19 +298,56 @@ ___________|||______________________________|______________/
     puts choose_train.current_station
   end
 
-
-
   def trains_on_station
     print 'Введите номер станции: '
     list_stations
-    station = gets.chomp.to_i
+    station_number = gets.chomp.to_i
 
-    station = @stations[station - 1]
+    # Проверяем, что введенный номер станции корректен
+    if station_number < 1 || station_number > @stations.size
+      puts "Неверный номер станции! Пожалуйста, выберите существующую станцию."
+      return
+    end
 
-    puts "На станции #{station} находятся поезда:"
+    # Получаем выбранную станцию
+    station = @stations[station_number - 1]
 
-    station.trains.each { |i| print i }
-    # Анонимная функция для вывода списка вагонов
+    # Выводим список поездов на станции
+    puts "На станции #{station.name} находятся поезда:"
+    station.trains.each.with_index(1) do |train, index|
+      puts "#{index}. Поезд №#{train.number}, тип: #{train.type}, скорость: #{train.current_speed}"
+    end
+  end
 
+  def occupy_wagon
+    print 'Введите номер вагона: '
+    list_wagons
+    wagon_number = gets.chomp.to_i
+
+    wagon = @wagons[wagon_number - 1]
+
+    if wagon.is_a?(PassengerWagon)
+      wagon.take_place
+      puts "Место в вагоне #{wagon.number} занято."
+    elsif wagon.is_a?(CargoWagon)
+      print 'Введите объем для загрузки: '
+      volume = gets.chomp.to_i
+      wagon.load_cargo(volume)
+      puts "Объем в вагоне #{wagon.number} занят."
+    else
+      puts 'Неверный вагон'
+    end
+  end
+
+  def list_trains
+    puts 'Поезда на станции:'
+    @trains.each(&:display_all_wagons)
+  end
+
+  def display_wagons
+    puts 'Вагоны поезда:'
+    @wagons.each do |wagon|
+      puts "- #{wagon.number} - #{wagon.type} - занято: #{wagon.busy} / свободно: #{wagon.unbusy}"
+    end
   end
 end

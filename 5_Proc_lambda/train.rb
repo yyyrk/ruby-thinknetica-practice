@@ -97,16 +97,4 @@ class Train
     @route.all_stations[@station_number - 1] if @station_number != 0
   end
 
-  # def valid?
-  #   validate!(number)
-  #   true
-  # rescue RuntimeError
-  #   false
-  # end
-  #
-  # protected
-  #
-  # def validate!(number)
-  #   raise 'Неверный формат номера поезда!' if number !~ NUMBER_FORMAT
-  # end
 end

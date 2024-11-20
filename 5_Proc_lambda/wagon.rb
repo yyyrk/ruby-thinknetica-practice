@@ -20,10 +20,6 @@ class Wagon
     @unbusy = amount - busy
   end
 
-  # def display_wagons
-  #   puts "Список вагонов у поезда:"
-  #   @all_wagons.each { |wagon| puts wagon }
-  # end
 
   def valid?
     validate!

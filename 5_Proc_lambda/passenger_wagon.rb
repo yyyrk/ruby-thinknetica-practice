@@ -27,6 +27,15 @@ class PassengerWagon < Wagon
     fill(-1)
   end
 
+  def take_place
+    if unbusy > 0
+      @busy += 1
+      @unbusy -= 1
+    else
+      puts "Нет свободных мест!"
+    end
+  end
+
   private
 
   def validate!
