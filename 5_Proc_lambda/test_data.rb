@@ -1,5 +1,5 @@
 def primary
-  # Станции
+
   s11 = Station.new('NewYork')
   s12 = Station.new('Orlando')
   s13 = Station.new('Portlend')
@@ -8,10 +8,8 @@ def primary
   s21 = Station.new('Chicago')
   s22 = Station.new('Detroit')
 
-  # Добавляем станции в массив
   @stations = [s11, s12, s13, s14, s15, s21, s22]
 
-  # Маршруты
   r1 = Route.new(s11, s15)
   r1.add_station(s12)
   r1.add_station(s13)
@@ -20,7 +18,7 @@ def primary
   r2.add_station(s14)
   r2.add_station(s15)
 
-  # Добавляем маршруты в массив
+
   @routes = [r1, r2]
 
   # Поезда
@@ -30,20 +28,18 @@ def primary
   ct1 = CargoTrain.new('C1000')
   ct2 = CargoTrain.new('C2000')
 
-  # Добавляем поезда в массив
+
   @trains = [pt1, pt2, ct1, ct2]
 
-  # Вагоны
+
   pw1 = PassengerWagon.new('PW0001', 50)
   pw2 = PassengerWagon.new('PW0002', 45)
 
   cw1 = CargoWagon.new('CW0001', 1000)
   cw2 = CargoWagon.new('CW0002', 1100)
 
-  # Добавляем вагоны в массив
   @wagons = [pw1, pw2, cw1, cw2]
 
-  # Привязываем вагоны к поездам
   pt1.add_wagon(pw1)
   pt1.add_wagon(pw2)
 
