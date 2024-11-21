@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Wagon
   attr_reader :number, :type, :amount, :busy, :unbusy
 
@@ -10,15 +12,12 @@ class Wagon
     validate!
   end
 
-  # Добавил метод fiil для уменьшения дублирования кода для подклассов
   def fill(amount)
-    new_busy  = @busy + amount
-    if valid_fill?(new_busy)
-      @busy   = new_busy
-      @unbusy = @amount - @busy
-    else
-      raise "Недостаточно места"
-    end
+    new_busy = @busy + amount
+    raise 'Недостаточно места' unless valid_fill?(new_busy)
+
+    @busy = new_busy
+    @unbusy = @amount - @busy
   end
 
   def valid_fill?(new_busy)
@@ -27,10 +26,9 @@ class Wagon
 
   protected
 
-  # Добавил универсальную валидацию для всех типов вагонов
   def validate!
-    raise ArgumentError, "Номер вагона не может быть пустым" if @number.nil? || @number.empty?
-    raise ArgumentError, "Тип вагона не может быть пустым" if @type.nil? || @type.empty?
-    raise ArgumentError, "Количество мест должно быть больше нуля" if @amount <= 0
+    raise ArgumentError, 'Номер вагона не может быть пустым' if @number.to_s.strip.empty?
+    raise ArgumentError, 'Тип вагона не может быть пустым' if @type.to_s.strip.empty?
+    raise ArgumentError, 'Количество мест должно быть больше нуля' if @amount <= 0
   end
 end

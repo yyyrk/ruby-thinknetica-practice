@@ -1,5 +1,4 @@
 def primary
-
   s11 = Station.new('NewYork')
   s12 = Station.new('Orlando')
   s13 = Station.new('Portlend')

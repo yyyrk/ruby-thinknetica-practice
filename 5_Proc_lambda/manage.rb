@@ -1,6 +1,6 @@
 require_relative 'train'
 
-class Manage
+class Manager
   attr_reader :wagons, :trains, :stations, :routes
 
   def initialize
@@ -10,7 +10,7 @@ class Manage
     @routes   = []
   end
 
-  def menu
+  def show_menu
     model_of_train = %q(
 ___________   _______________________________________^__
  ___   ___ |||  ___   ___   ___    ___ ___  |   __  ,----\
@@ -32,42 +32,41 @@ ___________|||______________________________|______________/
 
     puts model_of_train
     puts line
-    puts "#{border}               #{color_header}<<---- GLOBAL MENU ---->>#{color_reset}                   #{border}"
+    puts "#{border}               #{color_header}<<---- GLOBAL MENU ---->>#{color_reset}                  #{border}"
     puts line
-    puts "#{border}  #{color_option}1. Создать станцию                                       #{color_reset}#{border}"
-    puts "#{border}  #{color_option}2. Создать поезд                                         #{color_reset}#{border}"
-    puts "#{border}  #{color_option}3. Создать вагон                                         #{color_reset}#{border}"
-    puts "#{border}  #{color_option}4. Создать маршрут                                       #{color_reset}#{border}"
-    puts "#{border}  #{color_option}5. Добавить/удалить станцию из маршрута                  #{color_reset}#{border}"
-    puts "#{border}  #{color_option}6. Назначить поезду маршрут                              #{color_reset}#{border}"
-    puts "#{border}  #{color_option}7. Добавить/отцепить вагон                               #{color_reset}#{border}"
-    puts "#{border}  #{color_option}8. Отправить поезд по маршруту                           #{color_reset}#{border}"
-    puts "#{border}  #{color_option}9. Вывести список вагонов у поезда                       #{color_reset}#{border}"
-    puts "#{border}  #{color_option}10. Выводить список поездов на станции                   #{color_reset}#{border}"
-    puts "#{border}  #{color_option}11. Занять место или объем в вагоне                      #{color_reset}#{border}"
-    puts "#{border}  #{color_exit}0. Выйти из программы                                    #{color_reset}#{border}"
+    puts "#{border}  #{color_option} 1. Создать станцию                                     #{color_reset}#{border}"
+    puts "#{border}  #{color_option} 2. Создать поезд                                       #{color_reset}#{border}"
+    puts "#{border}  #{color_option} 3. Создать вагон                                       #{color_reset}#{border}"
+    puts "#{border}  #{color_option} 4. Создать маршрут                                     #{color_reset}#{border}"
+    puts "#{border}  #{color_option} 5. Добавить/удалить станцию из маршрута                #{color_reset}#{border}"
+    puts "#{border}  #{color_option} 6. Назначить поезду маршрут                            #{color_reset}#{border}"
+    puts "#{border}  #{color_option} 7. Добавить/отцепить вагон                             #{color_reset}#{border}"
+    puts "#{border}  #{color_option} 8. Отправить поезд по маршруту                         #{color_reset}#{border}"
+    puts "#{border}  #{color_option} 9. Вывести список вагонов у поезда                     #{color_reset}#{border}"
+    puts "#{border}  #{color_option}10. Выводить список поездов на станции                  #{color_reset}#{border}"
+    puts "#{border}  #{color_option}11. Занять место или объем в вагоне                     #{color_reset}#{border}"
+    puts "#{border}  #{color_exit} 0. Выйти из программы                                  #{color_reset}#{border}"
     puts line
     print "#{border} Выберите номер из меню: "
   end
 
-  def choose
+  def choose_option
     loop do
-      menu
+      show_menu
       option = gets.strip
       case option
-      when '0'
-        break
-      when '1'  then create_station
-      when '2'  then create_train
-      when '3'  then create_wagon
-      when '4'  then create_route
-      when '5'  then edit_route
-      when '6'  then train_get_route
-      when '7'  then manage_wagons
-      when '8'  then move_train
-      when '9'  then list_wagons
-      when '10' then trains_on_station
-      when '11' then occupy_wagon
+      when '0'   then break
+      when '1'   then create_station
+      when '2'   then create_train
+      when '3'   then create_wagon
+      when '4'   then create_route
+      when '5'   then modify_route
+      when '6'   then assign_route_to_train
+      when '7'   then manage_wagons
+      when '8'   then send_train_on_route
+      when '9'   then show_wagons
+      when '10'  then show_trains_at_station
+      when '11'  then occupy_wagon
       else
         puts 'Такого пункта в меню не существует'
       end
@@ -158,7 +157,7 @@ ___________|||______________________________|______________/
   end
 
   # 5. Добавить/удалить станцию из маршрута
-  def edit_route
+  def modify_route
     print 'Введите номер маршрута для редактирования: '
     list_routes
     route_number = gets.strip.to_i - 1
@@ -186,7 +185,7 @@ ___________|||______________________________|______________/
   end
 
   # 6. Назначить поезду маршрут
-  def train_get_route
+  def assign_route_to_train
     print 'Введите номер маршрута: '
     list_routes
     route_number = gets.strip.to_i - 1
@@ -233,7 +232,7 @@ ___________|||______________________________|______________/
   end
 
   # 8. Отправить поезд по маршруту
-  def move_train
+  def send_train_on_route
     print '1. Переместить поезд вперед'
     print '2. Переместить поезд назад'
     option = gets.strip
@@ -257,74 +256,61 @@ ___________|||______________________________|______________/
   end
 
   # 9. Вывести список вагонов у поезда
-  def list_wagons
-    puts 'Вагоны:'
-    @wagons.each.with_index(1) do |wagon, index|
-      if wagon.is_a?(PassengerWagon)
-        puts "#{index}. Пассажирский вагон #{wagon.number}: занято #{wagon.busy_places} / свободно #{wagon.unbusy_places} мест"
-      elsif wagon.is_a?(CargoWagon)
-        puts "#{index}. Грузовой вагон #{wagon.number}: занято #{wagon.busy} / свободно #{wagon.volume_free} объема"
-      end
-    end
+  def show_wagons
+    puts 'Вагоны поезда:'
+    print 'Выберите поезд: '
+    list_trains
+    train_number = gets.strip.to_i - 1
+    train = @trains[train_number]
+    train.show_wagons
   end
 
-  # 10. Выводить список поездов на станции
-  def trains_on_station
-    print 'Введите номер станции: '
+  # 10. Вывести список поездов на станции
+  def show_trains_at_station
+    print 'Выберите станцию: '
     list_stations
-    station_number = gets.chomp.to_i - 1
-
-    if station_number < 0 || station_number >= @stations.size
-      puts 'Неверный номер станции.'
-      return
-    end
-
+    station_number = gets.strip.to_i - 1
     station = @stations[station_number]
-
-    puts "На станции #{station.name} находятся следующие поезда:"
-    station.trains.each.with_index(1) do |train, index|
-      puts "#{index}. Поезд №#{train.number}, тип: #{train.type}, скорость: #{train.current_speed} км/ч"
-    end
+    station.show_trains
   end
 
   # 11. Занять место или объем в вагоне
   def occupy_wagon
-    print 'Введите номер вагона: '
+    print 'Выберите вагон: '
     list_wagons
-    wagon_number = gets.chomp.to_i - 1
-
+    wagon_number = gets.strip.to_i - 1
     wagon = @wagons[wagon_number]
 
-    if wagon.is_a?(PassengerWagon)
-      wagon.take_seat  # Теперь вызываем take_seat для пассажирского вагона
-      puts "Место в пассажирском вагоне #{wagon.number} занято."
-    elsif wagon.is_a?(CargoWagon)
-      print 'Введите объем для загрузки (в куб. метрах): '
-      volume = gets.chomp.to_i
-      wagon.load_cargo(volume)  # Используем метод load_cargo для грузового вагона
-      puts "Объем в грузовом вагоне #{wagon.number} занят."
+    case wagon
+    when PassengerWagon
+      print 'Введите количество мест для бронирования: '
+      places = gets.strip.to_i
+      wagon.take_places(places)
+      puts "#{places} мест забронировано в вагоне #{wagon.number}."
+    when CargoWagon
+      print 'Введите объем для бронирования: '
+      volume = gets.strip.to_i
+      wagon.take_capacity(volume)
+      puts "#{volume} объема забронировано в вагоне #{wagon.number}."
     else
       puts 'Неизвестный тип вагона.'
     end
   end
 
-
-  # Добавио утилиты для вывода информации
+  # Методы для вывода списков
   def list_stations
-    @stations.each.with_index(1) do |station, index|
-      puts "#{index}. #{station.name}"
-    end
+    @stations.each_with_index { |station, index| puts "#{index + 1}. #{station.name}" }
   end
 
   def list_routes
-    @routes.each.with_index(1) do |route, index|
-      puts "#{index}. Маршрут: #{route.first_station.name} - #{route.last_station.name}"
-    end
+    @routes.each_with_index { |route, index| puts "#{index + 1}. #{route.first_station.name} - #{route.last_station.name}" }
   end
 
   def list_trains
-    @trains.each.with_index(1) do |train, index|
-      puts "#{index}. Поезд №#{train.number}, тип: #{train.type}, скорость: #{train.current_speed} км/ч"
-    end
+    @trains.each_with_index { |train, index| puts "#{index + 1}. #{train.number}" }
+  end
+
+  def list_wagons
+    @wagons.each_with_index { |wagon, index| puts "#{index + 1}. #{wagon.number}" }
   end
 end

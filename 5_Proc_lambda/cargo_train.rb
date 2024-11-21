@@ -9,6 +9,6 @@ class CargoTrain < Train
   end
 
   def add_wagon(wagon)
-    super if wagon.type == 'Cargo'
+    super(wagon) if wagon.type == :cargo
   end
 end

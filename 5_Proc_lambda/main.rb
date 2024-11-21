@@ -11,8 +11,9 @@ require_relative 'validations'
 require_relative 'manufactures'
 require_relative 'test_data'
 
-primary
+# Добавил метод, который инициализирует объекты
+# primary
 
 # Управляющий интерфейс
-start = Manage.new
-start.choose
+start = Manager.new
+start.choose_option

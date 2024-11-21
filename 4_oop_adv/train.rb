@@ -48,6 +48,9 @@ class Train
     @all_wagons << wagon unless @all_wagons.include?(wagon)
   end
 
+  #добавил псевдоним для метода
+  alias add_wagon connect_wagon
+
   def delete_wagon(wagon)
     @current_speed.zero? && @all_wagons.positive?
     @all_wagons.delete(wagon)

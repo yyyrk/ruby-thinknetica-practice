@@ -2,7 +2,7 @@ require_relative 'wagon'
 
 class CargoWagon < Wagon
   def initialize(number, volume)
-    super(number, 'cargo', volume)
+    super(number, :cargo, volume)
   end
 
   def load_cargo(volume)
