@@ -27,8 +27,8 @@ ___________|||______________________________|______________/
     # ANSI коды
     color_reset  = "\e[0m"
     color_header = "\e[34m" # Blue
-    color_option = "\e[32m"   # Green
-    color_exit   = "\e[31m"     # Red
+    color_option = "\e[32m" # Green
+    color_exit   = "\e[31m" # Red
 
     puts model_of_train
     puts line
