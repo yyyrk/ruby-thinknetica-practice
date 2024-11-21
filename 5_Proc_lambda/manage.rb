@@ -4,10 +4,10 @@ class Manage
   attr_reader :wagons, :trains, :stations, :routes
 
   def initialize
-    @wagons = []
-    @trains = []
+    @wagons   = []
+    @trains   = []
     @stations = []
-    @routes = []
+    @routes   = []
   end
 
   def menu
@@ -25,10 +25,10 @@ ___________|||______________________________|______________/
     line = '=' * 60
 
     # ANSI коды
-    color_reset = "\e[0m"
+    color_reset  = "\e[0m"
     color_header = "\e[34m" # Blue
     color_option = "\e[32m"   # Green
-    color_exit = "\e[31m"     # Red
+    color_exit   = "\e[31m"     # Red
 
     puts model_of_train
     puts line
@@ -57,15 +57,15 @@ ___________|||______________________________|______________/
       case option
       when '0'
         break
-      when '1' then create_station
-      when '2' then create_train
-      when '3' then create_wagon
-      when '4' then create_route
-      when '5' then edit_route
-      when '6' then train_get_route
-      when '7' then manage_wagons
-      when '8' then move_train
-      when '9' then list_wagons
+      when '1'  then create_station
+      when '2'  then create_train
+      when '3'  then create_wagon
+      when '4'  then create_route
+      when '5'  then edit_route
+      when '6'  then train_get_route
+      when '7'  then manage_wagons
+      when '8'  then move_train
+      when '9'  then list_wagons
       when '10' then trains_on_station
       when '11' then occupy_wagon
       else
@@ -258,12 +258,12 @@ ___________|||______________________________|______________/
 
   # 9. Вывести список вагонов у поезда
   def list_wagons
-    puts 'Вагоны поезда:'
+    puts 'Вагоны:'
     @wagons.each.with_index(1) do |wagon, index|
       if wagon.is_a?(PassengerWagon)
-        puts "#{index}. Пассажирский вагон #{wagon.number}: занято #{wagon.busy} / свободно #{wagon.unbusy} мест"
+        puts "#{index}. Пассажирский вагон #{wagon.number}: занято #{wagon.busy_places} / свободно #{wagon.unbusy_places} мест"
       elsif wagon.is_a?(CargoWagon)
-        puts "#{index}. Грузовой вагон #{wagon.number}: занято #{wagon.busy} / свободно #{wagon.unbusy} объема"
+        puts "#{index}. Грузовой вагон #{wagon.number}: занято #{wagon.busy} / свободно #{wagon.volume_free} объема"
       end
     end
   end
@@ -296,17 +296,18 @@ ___________|||______________________________|______________/
     wagon = @wagons[wagon_number]
 
     if wagon.is_a?(PassengerWagon)
-      wagon.take_place
+      wagon.take_seat  # Теперь вызываем take_seat для пассажирского вагона
       puts "Место в пассажирском вагоне #{wagon.number} занято."
     elsif wagon.is_a?(CargoWagon)
       print 'Введите объем для загрузки (в куб. метрах): '
       volume = gets.chomp.to_i
-      wagon.load_cargo(volume)
+      wagon.load_cargo(volume)  # Используем метод load_cargo для грузового вагона
       puts "Объем в грузовом вагоне #{wagon.number} занят."
     else
       puts 'Неизвестный тип вагона.'
     end
   end
+
 
   # Добавио утилиты для вывода информации
   def list_stations
