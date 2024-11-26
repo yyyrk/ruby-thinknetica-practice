@@ -3,13 +3,19 @@
 require_relative 'manufactures'
 require_relative 'instance_counter'
 require_relative 'validations'
+require_relative 'accessors'
 
 class Train
   include InstanceCounter
   include Manufactures
-  include Validations
+  include Validation
+  include Accessors
 
   attr_reader :number, :current_speed, :all_wagons
+
+  attr_accessor_with_history :number
+
+  strong_attr_accessor :current_speed, Integer
 
   @@trains = {}
 
@@ -19,10 +25,13 @@ class Train
     end
   end
 
+  validate :number, :presence
+  validate :number, :format, /^[а-яА-Яa-zA-Z0-9]{3}-?[а-яА-Яa-zA-Z0-9]{2}$/i
+
   def initialize(number)
-    @number = number
+    self.number = number
     @all_wagons = []
-    @current_speed = 0
+    self.current_speed = 0
     @station_number = 0
 
     validate!
@@ -36,11 +45,11 @@ class Train
   end
 
   def speed_up(speed)
-    @current_speed = speed
+    self.current_speed = speed
   end
 
   def stop
-    @current_speed = 0
+    self.current_speed = 0
   end
 
   def connect_wagon(wagon)

@@ -13,7 +13,7 @@ class Route
     @first_station = first_station
     @last_station = last_station
     @all_stations = [first_station, last_station]
-    validate!  # Вызываем валидацию
+    validate! # Вызываем валидацию
     register_instance
   end
 

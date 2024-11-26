@@ -1,7 +1,21 @@
-# frozen_string_literal: true
+require_relative 'validations'
+require_relative 'accessors'
 
 class Wagon
+  include Validation
+  include Accessors
+
   attr_reader :number, :type, :amount, :busy, :unbusy
+
+  # attr_accessor_with_history :number, :type, :amount
+
+  # strong_attr_accessor :amount, Integer
+
+  validate :number, :presence
+  validate :type, :presence
+  validate :type, :type, Symbol
+  validate :amount, :type, Integer
+  validate :amount, :presence
 
   def initialize(number, type, amount)
     @number    = number
@@ -22,13 +36,5 @@ class Wagon
 
   def valid_fill?(new_busy)
     new_busy >= 0 && new_busy <= @amount
-  end
-
-  protected
-
-  def validate!
-    raise ArgumentError, 'Номер вагона не может быть пустым' if @number.to_s.strip.empty?
-    raise ArgumentError, 'Тип вагона не может быть пустым' if @type.to_s.strip.empty?
-    raise ArgumentError, 'Количество мест должно быть больше нуля' if @amount <= 0
   end
 end

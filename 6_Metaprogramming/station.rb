@@ -3,13 +3,19 @@
 require_relative 'manufactures'
 require_relative 'instance_counter'
 require_relative 'validations'
+require_relative 'accessors'
 
 class Station
   include Manufactures
   include InstanceCounter
-  include Validations
+  include Validation
+  include Accessors
 
   attr_reader :name, :trains_on_station
+
+  # attr_accessor_with_history :name
+  #
+  # strong_attr_accessor :name, String
 
   @@all_stations = []
 
@@ -18,6 +24,9 @@ class Station
       @@all_stations
     end
   end
+
+  validate :name, :presence
+  validate :name, :type, String
 
   def initialize(name)
     @name = name
