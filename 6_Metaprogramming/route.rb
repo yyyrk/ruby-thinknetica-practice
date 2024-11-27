@@ -2,10 +2,12 @@
 
 require_relative 'validations'
 require_relative 'instance_counter'
+require_relative 'accessors'
 
 class Route
   include InstanceCounter
-  include Validations
+  include Validation
+  extend Accessors
 
   attr_reader :first_station, :last_station, :all_stations
 
@@ -13,7 +15,7 @@ class Route
     @first_station = first_station
     @last_station = last_station
     @all_stations = [first_station, last_station]
-    validate! # Вызываем валидацию
+    validate!
     register_instance
   end
 

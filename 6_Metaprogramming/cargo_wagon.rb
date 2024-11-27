@@ -1,4 +1,5 @@
 require_relative 'wagon'
+require_relative 'accessors'
 
 class CargoWagon < Wagon
   def initialize(number, volume)

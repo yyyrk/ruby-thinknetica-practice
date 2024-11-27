@@ -9,7 +9,7 @@ class Train
   include InstanceCounter
   include Manufactures
   include Validation
-  include Accessors
+  extend Accessors
 
   attr_reader :number, :current_speed, :all_wagons
 

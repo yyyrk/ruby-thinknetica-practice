@@ -1,3 +1,5 @@
+require_relative 'accessors'
+
 module InstanceCounter
   def self.included(current_class)
     current_class.extend(ClassMethods)

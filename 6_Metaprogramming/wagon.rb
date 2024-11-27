@@ -1,15 +1,15 @@
-require_relative 'validations'
 require_relative 'accessors'
+require_relative 'validations'
 
 class Wagon
   include Validation
-  include Accessors
+  extend Accessors
 
   attr_reader :number, :type, :amount, :busy, :unbusy
 
-  # attr_accessor_with_history :number, :type, :amount
+  attr_accessor_with_history :number, :type, :amount
 
-  # strong_attr_accessor :amount, Integer
+  strong_attr_accessor :amount, Integer
 
   validate :number, :presence
   validate :type, :presence

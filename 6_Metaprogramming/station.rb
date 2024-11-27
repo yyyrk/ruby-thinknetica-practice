@@ -9,13 +9,13 @@ class Station
   include Manufactures
   include InstanceCounter
   include Validation
-  include Accessors
+  extend Accessors
 
   attr_reader :name, :trains_on_station
 
-  # attr_accessor_with_history :name
-  #
-  # strong_attr_accessor :name, String
+  attr_accessor_with_history :name
+
+  strong_attr_accessor :name, String
 
   @@all_stations = []
 

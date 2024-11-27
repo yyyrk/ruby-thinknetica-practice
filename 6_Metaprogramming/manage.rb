@@ -1,4 +1,6 @@
 require_relative 'train'
+require_relative 'accessors'
+require_relative 'validations'
 
 class Manager
   attr_reader :wagons, :trains, :stations, :routes
