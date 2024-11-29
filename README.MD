@@ -1,5 +1,6 @@
 # Ruby Metaprogramming Project
 
+cli_train_image.png
 This repository showcases a practical Ruby project focused on metaprogramming concepts. The project simulates a train management system, integrating advanced features like custom accessors, validations, and modular design.
 
 ## Overview
