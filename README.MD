@@ -53,8 +53,8 @@ Defines the path trains follow, with functionality to add and remove stations.
 1. Clone the repository:
 
 ```ruby
-git clone https://github.com/yourusername/ruby-metaprogramming.git
-cd ruby-metaprogramming
+git clone https://github.com/yyyrk/ruby-thinknetica-practice.git
+cd 6_Metaprogramming
 ```
 
 2. Run the application:
