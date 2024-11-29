@@ -86,8 +86,6 @@ wagon.amount = 'not_a_number' # Raises an error: "Expected Integer, got String"
 ## Contributing
 Contributions are welcome! If you find any bugs or want to enhance functionality, feel free to open an issue or submit a pull request.
 
-License
-This project is licensed under the MIT License.
 ------
 
 Developed with ❤️ by Andrew Yurik.
