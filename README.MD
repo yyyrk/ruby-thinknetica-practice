@@ -19,13 +19,7 @@ The project contains various classes and modules that represent trains, wagons, 
   - Ensures attribute presence, format, and type correctness.
   - Dynamically integrates validations into classes.
 
-## Project Structure
-
-project/ ├── accessors.rb # Custom accessors module ├── validations.rb # Validation module ├── manufactures.rb # Manufacturer details module ├── instance_counter.rb # Module for class instance tracking ├── train.rb # Train base class ├── passenger_train.rb # PassengerTrain subclass ├── cargo_train.rb # CargoTrain subclass ├── wagon.rb # Wagon base class ├── passenger_wagon.rb # PassengerWagon subclass ├── cargo_wagon.rb # CargoWagon subclass ├── station.rb # Station class ├── route.rb # Route class ├── main.rb # Entry point for the application └── README.md # Documentation
-
-
 ## Key Modules and Classes
-
 ### `Accessors`
 - **Methods**:
   - `attr_accessor_with_history`: Tracks historical changes to attributes.
