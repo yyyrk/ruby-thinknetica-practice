@@ -1,54 +1,90 @@
-# Моё хранилище решенных ruby задачек
+# Ruby Metaprogramming Project
 
-Здесь я регулярно буду выкладывать решения задач от школы программирования Thinktetica. Важная заметка - несколько уроков я сохранял в 4 урок и не создавал новые папки, поэтому в 5 идут сразу блоки.
+This repository showcases a practical Ruby project focused on metaprogramming concepts. The project simulates a train management system, integrating advanced features like custom accessors, validations, and modular design.
 
+## Overview
 
-## Важные ссылки для любого Ruby разработчика
+The project contains various classes and modules that represent trains, wagons, stations, routes, and their interactions. Key Ruby techniques like dynamic method creation, mixins, and type enforcement are implemented to demonstrate metaprogramming and OOP principles.
 
-0. **Основа основ - грамотный стиль кода.** Это репозиторий с описанием правил и рекомендаций о том как писать красивый, удобный и эффективный код для себя и других разработчиков [ruby-style-guide-RU](https://github.com/arbox/ruby-style-guide/blob/master/README-ruRU.md)
+## Features
 
-1. **Официальная документация Ruby**: Это основной источник информации о языке Ruby, его синтаксисе и стандартной библиотеке. Вы можете найти её по адресу [ruby-doc.org](https://www.ruby-doc.org).
+- **Train Management**: Classes for `Train`, `PassengerTrain`, and `CargoTrain`.
+- **Wagon Management**: Classes for `PassengerWagon` and `CargoWagon` with dynamic attributes.
+- **Station Management**: The `Station` class tracks and filters trains.
+- **Route Definition**: The `Route` class handles the journey path for trains.
+- **Custom Accessors**:
+  - `attr_accessor_with_history`: Keeps a history of attribute values.
+  - `strong_attr_accessor`: Enforces type checking on attributes.
+- **Validation**:
+  - Ensures attribute presence, format, and type correctness.
+  - Dynamically integrates validations into classes.
 
-2. **Ruby on Rails**: Если вы работаете с фреймворком Ruby on Rails, официальная документация по Rails будет незаменима. Она доступна на [rubyonrails.org](https://rubyonrails.org).
+## Key Modules and Classes
+### `Accessors`
+- **Methods**:
+  - `attr_accessor_with_history`: Tracks historical changes to attributes.
+  - `strong_attr_accessor`: Restricts attributes to specific data types.
+  
+### `Validation`
+- Provides:
+  - **Presence Validation**: Ensures attributes are not `nil`.
+  - **Type Validation**: Verifies attributes match specified data types.
+  - **Format Validation**: Validates attributes against regex patterns.
 
-3. **RubyGems**: Это система управления пакетами для Ruby. На сайте [rubygems.org](https://rubygems.org) вы можете найти и установить различные библиотеки и гемы.
+### `Train`
+Manages train attributes and operations, such as:
+- Assigning and navigating routes.
+- Connecting and disconnecting wagons.
+- Speed control.
 
-4. **RDoc**: Это инструмент для документирования Ruby-кода. Он позволяет создавать документацию для ваших проектов и доступен на [rdoc.github.io](https://rdoc.github.io).
+### `Wagon`
+A base class for wagons, with features to dynamically manage attributes and enforce rules.
 
-5. **Сообщество и форумы**: Участие в сообществах, таких как Stack Overflow или Reddit, может помочь вам получить ответы на вопросы и обменяться опытом с другими разработчиками.
+### `Station`
+Tracks trains at a station and offers methods to filter trains by type.
 
-6. **RubyFlow**: Это ресурс, где публикуются статьи и новости о Ruby. Он может быть полезен для получения актуальной информации и обучения новым техникам. Сайт доступен по адресу [rubyflow.com](http://rubyflow.com).
+### `Route`
+Defines the path trains follow, with functionality to add and remove stations.
 
-## Ссылки с мини-курсами для моей само подготовки. Для повторения основ.
+## Running the Application
 
-1. по командной строке https://linuxsurvival.com/linux-tutorial-introduction/
-2. по git https://learngitbranching.js.org/
-3. по git на русском http://githowto.com/ru
+1. Clone the repository:
 
-## Полезные материалы:
-
-- Cheat Sheet по консоли, Ruby и Rails [pragtob.info](http://www.pragtob.info/rails-beginner-cheatsheet/index.html)
-- Мини-книга по командной строке https://launchschool.com/books/command_line
-- Мини-книга по Git и Github https://launchschool.com/books/git
-
-
-
-
-## Пример простого Ruby кода
-
-```ruby
-# передача блока как именованного аргумента:
-
-def caps(str, &block)
-  str.capitalize!
-  block.call(str)
-end
-
-caps('abc') { |x| puts x }
+   ```bash
+   git clone https://github.com/yourusername/ruby-metaprogramming.git
+   cd ruby-metaprogramming
 ```
 
-## Ссылки которые оказались для меня полезными
+2. Run the application:
 
--  Просто PDF с оновами [по рубикам](https://launchschool.com/books/githttps://www.rubyguides.com/wp-content/uploads/2019/11/ruby-reference-2019-optin.pdf)
-- Классная статься [про блоки](https://online.pragmaticstudio.com/tour/courses/ruby-blocks/steps/4)
-- Этот сайт мне просто понравился про рубин от [rubyguides](https://www.rubyguides.com)
+   ```bash
+ruby main.rb
+```
+
+## Examples
+Using attr_accessor_with_history
+
+wagon = Wagon.new('001', :cargo, 100)
+wagon.number = '002'
+wagon.number = '003'
+puts wagon.number_history # Output: ["001", "002"]
+
+## Validating Attributes
+
+```ruby
+
+train = Train.new(nil) # Raises an error: "Attribute 'number' can't be nil"
+Enforcing Type with strong_attr_accessor
+```
+```ruby
+wagon.amount = 'not_a_number' # Raises an error: "Expected Integer, got String"
+```
+
+Contributing
+Contributions are welcome! If you find any bugs or want to enhance functionality, feel free to open an issue or submit a pull request.
+
+License
+This project is licensed under the MIT License.
+------
+
+Developed with ❤️ by Andrew Yurik.
