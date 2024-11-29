@@ -1,6 +1,7 @@
-# Ruby Metaprogramming Project
+# Ruby Practice Metaprogramming Project
 
 ![image_alt](https://github.com/yyyrk/ruby-thinknetica-practice/blob/main/cli_interface.png)
+
 This repository showcases a practical Ruby project focused on metaprogramming concepts. The project simulates a train management system, integrating advanced features like custom accessors, validations, and modular design.
 
 ## Overview
@@ -51,29 +52,30 @@ Defines the path trains follow, with functionality to add and remove stations.
 
 1. Clone the repository:
 
-   ```bash
-   git clone https://github.com/yourusername/ruby-metaprogramming.git
-   cd ruby-metaprogramming
+```ruby
+git clone https://github.com/yourusername/ruby-metaprogramming.git
+cd ruby-metaprogramming
 ```
 
 2. Run the application:
 
-   ```bash
+```ruby 
 ruby main.rb
 ```
 
 ## Examples
-Using attr_accessor_with_history
 
+Using attr_accessor_with_history
+```ruby
 wagon = Wagon.new('001', :cargo, 100)
 wagon.number = '002'
 wagon.number = '003'
 puts wagon.number_history # Output: ["001", "002"]
+```
 
 ## Validating Attributes
 
 ```ruby
-
 train = Train.new(nil) # Raises an error: "Attribute 'number' can't be nil"
 Enforcing Type with strong_attr_accessor
 ```
@@ -81,7 +83,7 @@ Enforcing Type with strong_attr_accessor
 wagon.amount = 'not_a_number' # Raises an error: "Expected Integer, got String"
 ```
 
-Contributing
+## Contributing
 Contributions are welcome! If you find any bugs or want to enhance functionality, feel free to open an issue or submit a pull request.
 
 License
